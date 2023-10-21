@@ -127,24 +127,30 @@ function fetchData(url, method, callback) {
 function readQrCodeData(data) {
   var kickboardCom = data.split('?')[0];
   var kickId = data.split('?')[1].split('name=')[1];
+  var select = document.querySelector('#companyList');
 
-  $.ajax({
-    url: '/company/info?domain='+kickboardCom,
-    type: 'get',
-    dataType: 'json',
-    async: false,
-    success: function(data) {
-      var select = document.querySelector('#companyList');
-      for(var i=0; i<select.options.length; i++) {
-        if(select.options[i].value == data.cateCd) {
-          select.options[i].selected = true;
-        }
-      }
-    },
-    error: function(req, status, err) {
-      console.log(req, status, err);
+  for(var i=0; i<select.options.length; i++) {
+    if(select.options[i].dataset.value == kickboardCom) {
+      select.options[i].selected = true;
     }
-  });
+  }
+  // $.ajax({
+  //   url: '/company/info?domain='+kickboardCom,
+  //   type: 'get',
+  //   dataType: 'json',
+  //   async: false,
+  //   success: function(data) {
+  //     var select = document.querySelector('#companyList');
+  //     for(var i=0; i<select.options.length; i++) {
+  //       if(select.options[i].value == data.cateCd) {
+  //         select.options[i].selected = true;
+  //       }
+  //     }
+  //   },
+  //   error: function(req, status, err) {
+  //     console.log(req, status, err);
+  //   }
+  // });
 
   $('#kickboardId').val(kickId);
 }
