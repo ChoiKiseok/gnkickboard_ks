@@ -1,3 +1,46 @@
+function makeAjaxRequest(url_param, method_param , callback) {
+  $.ajax({
+      url: url_param,
+      method: method_param,
+      dataType: 'json'
+  })
+  .done(function (data) {
+      callback(data); // 성공 시 콜백 함수 호출
+  })
+  .fail(function (xhr, status, error) {
+      console.error(error);
+      // 에러 처리 로직
+  });
+}
+
+function updateViewCompany(data){  
+  console.log(data)
+  var $companyList = $("#companyList");
+  $companyList.empty();
+  $companyList.append($("<option></option>")
+  .attr("value", "")
+      .text("업체를 선택하세요."));
+   
+  if(data && data.length > 0){
+    // JSON 데이터를 기반으로 새로운 옵션을 추가
+    $.each(data, function (index, item) { 
+      $companyList.append($("<option></option>")
+            .attr("value", item.ctgry_ID)
+            .attr("data-value", item.ctgry_URL)
+            .text(item.ctgry_NM));
+    });
+  } else {
+    // JSON 데이터가 없거나 빈 배열인 경우 "자료가 없습니다" 옵션을 추가
+    $companyList.append($("<option></option>")
+        .attr("value", "")
+        .text("등록된 업체가 없습니다."));
+  }
+}
+
+function fetchData(url, method, callback) {
+  makeAjaxRequest(url, method, callback);
+}
+
 $( document ).ready(function() {
   try{
     fetchData("http://218.235.237.30/api/v1/getCompanyCategory/company.json", 
@@ -81,77 +124,18 @@ function qrScannerOn() {
   }
 }
 
-function makeAjaxRequest(url_param, method_param , callback) {
-  $.ajax({
-      url: url_param,
-      method: method_param,
-      dataType: 'json'
-  })
-  .done(function (data) {
-      callback(data); // 성공 시 콜백 함수 호출
-  })
-  .fail(function (xhr, status, error) {
-      console.error(error);
-      // 에러 처리 로직
-  });
-}
-
-function updateViewCompany(data){  
-  console.log(data)
-  var $companyList = $("#companyList");
-  $companyList.empty();
-  $companyList.append($("<option></option>")
-  .attr("value", "")
-      .text("업체를 선택하세요."));
-   
-  if(data && data.length > 0){
-    // JSON 데이터를 기반으로 새로운 옵션을 추가
-    $.each(data, function (index, item) { 
-      $companyList.append($("<option></option>")
-            .attr("value", item.ctgry_ID)
-            .attr("data-value", item.ctgry_URL)
-            .text(item.ctgry_NM));
-    });
-  } else {
-    // JSON 데이터가 없거나 빈 배열인 경우 "자료가 없습니다" 옵션을 추가
-    $companyList.append($("<option></option>")
-        .attr("value", "")
-        .text("등록된 업체가 없습니다."));
-  }
-}
-
-function fetchData(url, method, callback) {
-  makeAjaxRequest(url, method, callback);
-}
-
+// QR코드를 읽어 해당하는 회사 선택 및 ID입력
 function readQrCodeData(data) {
   var kickboardCom = data.split('?')[0];
   var kickId = data.split('?')[1].split('name=')[1];
-  var select = document.querySelector('#companyList');
-
-  for(var i=0; i<select.options.length; i++) {
-    if(select.options[i].dataset.value == kickboardCom) {
-      select.options[i].selected = true;
+  
+  var $companyList = $("#companyList");
+  $companyList.find('option').each(function() {
+    var option = $(this);
+    if(option.attr('data-value') === kickboardCom) {
+      option.prop('selected', true);
     }
-  }
-  // $.ajax({
-  //   url: '/company/info?domain='+kickboardCom,
-  //   type: 'get',
-  //   dataType: 'json',
-  //   async: false,
-  //   success: function(data) {
-  //     var select = document.querySelector('#companyList');
-  //     for(var i=0; i<select.options.length; i++) {
-  //       if(select.options[i].value == data.cateCd) {
-  //         select.options[i].selected = true;
-  //       }
-  //     }
-  //   },
-  //   error: function(req, status, err) {
-  //     console.log(req, status, err);
-  //   }
-  // });
-
+  });
   $('#kickboardId').val(kickId);
 }
 
