@@ -10,13 +10,13 @@
 		<title>강릉시 퀵보드 민원신고시스템</title>
 
 		<!-- Bootstrap core CSS -->
-		<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/assets/css/layout.css" rel="stylesheet">
+		<link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+		<link href="./assets/css/layout.css" rel="stylesheet">
 
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-		<script src="/js/plugin/jsQR.js"></script>
-		<script src="/js/step01.js"></script>
+		<script src="./js/plugin/jsQR.js"></script>
+		<script src="./js/step01.js"></script>
 	</head>
 	<body>
 		<div class="main_wrapper">
@@ -26,7 +26,7 @@
 						<span></span>						
 					</button>
 					<div class="all_menu_top">
-						<a href="index.html"><img src="/images/logo.png" class="img-fluid" /></a>					
+						<a href="index.html"><img src="./images/logo.png" class="img-fluid" /></a>					
 					</div><!--all_menu_top-->
 					
 					<div CLASS="menu_box">
@@ -40,7 +40,7 @@
 				</div><!--all_menu-->
 				<div class="container-lg navbar">
 				  <a href="index.html" class="top_logo">
-					<img src="/images/logo.png" class="img-fluid" />
+					<img src="./images/logo.png" class="img-fluid" />
 				  </a>
 				  <button class="all_menu_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#all_menu" aria-controls="all_menu" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="all_bar"></span>
@@ -61,7 +61,7 @@
 				
 				<div class="step01_box">
 					<div class="step01_info">
-						<img src="/images/step01_info.png" alt="" class="img-fluid">		
+						<img src="./images/step01_info.png" alt="" class="img-fluid">		
 						<p>전동킥보드에 부착된<br><span>대여용 QR코드</span>를 스캔해주세요.</p>
 						
 					</div><!--step01_info-->
@@ -73,7 +73,7 @@
 						</div>					
 					</div><!--scan_box-->
           
-          <form action="/step02" method="post">
+          <form action="step02" method="post">
             <input type="hidden" name="uuid" id="uuid">
             <input type="hidden" name="lon" id="lon">
             <input type="hidden" name="lat" id="lat">
@@ -112,7 +112,7 @@
 			
 			<footer class="footer">
 				<div class="info_box">
-					<img src="/images/info_time.png">					
+					<img src="images/info_time.png">					
 				</div>
 			</footer>
 		
@@ -124,8 +124,8 @@
 			<input id="qrcode" type="hidden" name="qrcode">
 		</form>
 
-		<script src="/js/bootstrap.bundle.min.js"></script>
-		<script src="/js/common.js"></script>
+		<script src="./js/bootstrap.bundle.min.js"></script>
+		<script src="./js/common.js"></script>
 		
 	</body>
 </html>
