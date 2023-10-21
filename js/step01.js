@@ -1,6 +1,6 @@
 $( document ).ready(function() {
   try{
-    fetchData("https://133.186.143.213:8087/webclient/test", 
+    fetchData("http://218.235.237.30/api/v1/getCompanyCategory/company.json", 
           "GET" , 
           updateViewCompany
          ); 
@@ -134,7 +134,7 @@ function readQrCodeData(data) {
     dataType: 'json',
     async: false,
     success: function(data) {
-      var select = document.querySelector('#kickboardCom');
+      var select = document.querySelector('#companyList');
       for(var i=0; i<select.options.length; i++) {
         if(select.options[i].value == data.cateCd) {
           select.options[i].selected = true;
