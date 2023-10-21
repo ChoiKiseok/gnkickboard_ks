@@ -1,6 +1,6 @@
 $( document ).ready(function() {
   try{
-    fetchData("http://218.235.237.30/api/v1/getCompanyCategory/company.json", 
+    fetchData("https://133.186.143.213:8087/webclient/test", 
           "GET" , 
           updateViewCompany
          ); 
